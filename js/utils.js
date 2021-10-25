@@ -28,9 +28,17 @@ const getRandomArray = (refArray) => {
 
 const getRandomArrayElement = (array) => array[getRandomInt(0, array.length - 1)];
 
+
+const createHtmlElement = (tag, className) => {
+  const newElem = document.createElement(tag);
+  newElem.classList.add(className);
+  return newElem;
+};
+
 export {
   getRandomFloat,
   getRandomInt,
   getRandomArrayElement,
-  getRandomArray
+  getRandomArray,
+  createHtmlElement
 };
