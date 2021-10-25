@@ -105,4 +105,4 @@ const createTestPlaceList = (similarPlacesCount) => {
   return testPlaceList;
 };
 
-export {createTestPlaceList};
+export {fillCard, createTestPlaceList, getTypeOfPlace};
