@@ -1,16 +1,14 @@
-import {activateForm, setCoordinates } from './form.js';
+import {activateForm, setCoordinates, submitData, DEFAULT_COORDINATES} from './form.js';
 import { fillCard } from './similar-place.js';
-import { createPlacesList } from './data.js';
-
 
 const mapCanvas = L.map('map-canvas')
   .on('load', () => {
     activateForm();
   })
   .setView({
-    lat: 35.67500,
-    lng: 139.75000,
-  }, 13);
+    lat: DEFAULT_COORDINATES.lat,
+    lng: DEFAULT_COORDINATES.lng,
+  }, 10);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -27,8 +25,8 @@ const mainPinIcon = L.icon({
 
 const mainPinMarker = L.marker(
   {
-    lat: 35.67500,
-    lng: 139.75000,
+    lat: DEFAULT_COORDINATES.lat,
+    lng: DEFAULT_COORDINATES.lng,
   },
   {
     draggable: true,
@@ -36,7 +34,7 @@ const mainPinMarker = L.marker(
   },
 );
 
-mainPinMarker.on('moveend', (evt) => {
+mainPinMarker.on('move', (evt) => {
   const coordinates = evt.target.getLatLng();
   setCoordinates(coordinates.lat, coordinates.lng);
 });
@@ -71,6 +69,7 @@ const putMarkersOnMap = (pointsArr) => {
   });
 };
 
-const numOfPlaces = 20;
-const points = createPlacesList(numOfPlaces);
-putMarkersOnMap(points);
+submitData(mainPinMarker);
+
+
+export { putMarkersOnMap };

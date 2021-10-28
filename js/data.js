@@ -55,4 +55,4 @@ const createPlacesList = (num = 1) => {
   return testPlacesList;
 };
 
-export {createPlacesList};
+export { createPlacesList };
