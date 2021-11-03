@@ -1,4 +1,3 @@
-import { putMarkersOnMap } from './map.js';
 import { createHtmlElement } from './utils.js';
 
 const onErrorDataLoading = () => {
@@ -13,13 +12,12 @@ const onErrorDataLoading = () => {
   }, 5000);
 };
 
-const fetchDataFromServer = () => {
+const fetchDataFromServer = (onSuccess) => {
   fetch('https://22.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
-    .then((places) => putMarkersOnMap(places))
+    .then((places) => onSuccess(places))
     .catch(() => onErrorDataLoading());
 };
 
-fetchDataFromServer();
-
 export { fetchDataFromServer };
+

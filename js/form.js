@@ -71,6 +71,7 @@ const setCheckInOutTime = (data) => {
   timein.value = data;
 };
 
+
 TIME_FIELDSET.addEventListener('change', (evt) => {
   setCheckInOutTime(evt.target.value);
 });
@@ -221,7 +222,6 @@ const submitData = (mainPin) => {
   });
   return true;
 };
-syncRoomsAndGuests(1);
-deactivateForm();
 
-export {deactivateForm, activateForm, setCoordinates, DEFAULT_COORDINATES, submitData};
+
+export {deactivateForm, activateForm, setCoordinates, DEFAULT_COORDINATES, submitData, syncRoomsAndGuests};

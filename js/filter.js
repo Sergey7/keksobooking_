@@ -20,6 +20,18 @@ const activateFilter = () => {
   CHECKBOX_FILTER.querySelectorAll('input').forEach((checkbox) => checkbox.disabled = false);
 };
 
-deactivateFilter();
 
-export {activateFilter, resetFilter };
+const mapFilter = document.querySelectorAll('.map__filter');
+const features = document.querySelector('#housing-features');
+
+const filterTypeSimilarPlace = (cb) => {
+  mapFilter.forEach((filter) => filter.addEventListener('change', (evt) => {
+    cb(evt.target.value);
+  }));
+  features.addEventListener('change', (evt) => {
+    cb(evt.target.value);
+  });
+};
+
+
+export {activateFilter, resetFilter, deactivateFilter, filterTypeSimilarPlace };

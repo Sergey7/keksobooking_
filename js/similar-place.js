@@ -57,8 +57,9 @@ const getPhotos = (card, photosData) => {
 
 const getFeatures = (card, featuresData) => {
   const popupFeatures = card.querySelector('.popup__features');
-  popupFeatures.innerHtml = '';
-
+  for (let ind = popupFeatures.children.length - 1; ind >= 0; --ind) {
+    popupFeatures.children[ind].remove();
+  }
   const featuresFragment = document.createDocumentFragment();
   const featureTemplate = createHtmlElement('li', 'popup__feature');
 
@@ -72,6 +73,7 @@ const getFeatures = (card, featuresData) => {
 
 const appendFragment = (card, elementClass, data, fragment) => {
   if (data.length !== 0) {
+    card.querySelector(elementClass).innerHtml = '';
     card.querySelector(elementClass).appendChild(fragment);
   } else {hiddenElement(card, elementClass);}
 };
@@ -86,10 +88,8 @@ const fillCard = (card, {author, offer}) => {
   fillTextContent(card, '.popup__type', getTypeOfPlace(offer.type));
   (offer.rooms && offer.guests) ? fillTextContent(card, '.popup__text--capacity', `${getCapacityRooms(offer.rooms)} ${getCapacityGuests(offer.guests)}`) : hiddenElement(card, '.popup__text--capacity');
   (offer.checkin && offer.checkout) ? fillTextContent(card, '.popup__text--time', `'Заезд после ${offer.checkin} выезд до ${offer.checkout}`) : hiddenElement(card, '.popup__text--time');
-
-  appendFragment(card, '.popup__photos', offer.photos, getPhotos(card, offer.photos));
   appendFragment(card, '.popup__features', offer.features, getFeatures(card, offer.features));
-
+  appendFragment(card, '.popup__photos', offer.photos, getPhotos(card, offer.photos));
 };
 
 
